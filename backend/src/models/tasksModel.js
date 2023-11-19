@@ -26,10 +26,21 @@ const deleteTask = async (id) => {
   return removedTask;
 };
 
+//Atualizar uma task no banco de dados
+const updateTask = async (id, task) => {
+  const query = 'UPDATE tasks SET title = ?, status = ? WHERE id = ?';
+
+  const { title, status } = task;
+
+  const updatedTask = await connection.execute(query, [title, status, id]);
+  return updatedTask;
+};
+
 
 
 module.exports = {
   getAll,
   createTask,
-  deleteTask
+  deleteTask,
+  updateTask
 };
